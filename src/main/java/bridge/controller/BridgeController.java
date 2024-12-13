@@ -4,7 +4,7 @@ import bridge.generator.BridgeRandomNumberGenerator;
 import bridge.handler.RetryHandler;
 import bridge.model.BridgeGame;
 import bridge.model.BridgeMaker;
-import bridge.model.Success;
+import bridge.service.BridgeResultService;
 import bridge.view.InputView;
 import bridge.view.OutputView;
 
@@ -14,10 +14,12 @@ public class BridgeController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private final BridgeResultService bridgeResultService;
 
-    public BridgeController(InputView inputView, OutputView outputView){
+    public BridgeController(InputView inputView, OutputView outputView, BridgeResultService bridgeResultService){
         this.inputView = inputView;
         this.outputView = outputView;
+        this.bridgeResultService = bridgeResultService;
     }
 
     public void run(){
@@ -28,6 +30,7 @@ public class BridgeController {
         outputView.printStartMessage();
         int bridgeSize = RetryHandler.retryReturn(inputView::readBridgeSize);
         List<String> bridge = makeBridge(bridgeSize);
+        System.out.println(bridge);
         crossBridge(bridge);
     }
 
@@ -46,6 +49,8 @@ public class BridgeController {
                     bridgeGame.retry();
                     continue;
                 }
+                printFinalResult(bridgeGame);
+                break;
             }
             if (bridgeGame.getMovePosition() == bridge.size()){
                 printFinalResult(bridgeGame);
@@ -59,12 +64,7 @@ public class BridgeController {
     }
 
     private void printFinalResult(BridgeGame bridgeGame){
-        String isSucceed = Success.FAIL.getIsSucceed();
-        if (bridgeGame.getIsSuccess()){
-            isSucceed = Success.SUCCESS.getIsSucceed();
-        }
-        outputView.printResult(bridgeGame.getUpperBridge(), bridgeGame.getLowerBridge(), isSucceed, bridgeGame.getTryCount());
+        outputView.printResult(bridgeResultService.registerFinalResult(bridgeGame));
     }
-
 
 }

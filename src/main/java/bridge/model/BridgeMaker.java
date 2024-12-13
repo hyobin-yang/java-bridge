@@ -17,13 +17,17 @@ public class BridgeMaker {
         List<String> bridge = new ArrayList<>();
         for (int i=0; i < size; i++){
             int number = bridgeNumberGenerator.generate();
-            if (BridgeRow.getBridgeRow(number).equals(BridgeRow.UP)){
-                bridge.add(BridgeRow.UP.getBridgeRow());
-            }
-            if (BridgeRow.getBridgeRow(number).equals(BridgeRow.DOWN)){
-                bridge.add(BridgeRow.DOWN.getBridgeRow());
-            }
+            addBridge(number, bridge);
         }
         return bridge;
+    }
+
+    private void addBridge(int number, List<String> bridge){
+        if (BridgeRow.getBridgeRow(number).equals(BridgeRow.UP)){
+            bridge.add(BridgeRow.UP.getBridgeRow());
+        }
+        if (BridgeRow.getBridgeRow(number).equals(BridgeRow.DOWN)){
+            bridge.add(BridgeRow.DOWN.getBridgeRow());
+        }
     }
 }
