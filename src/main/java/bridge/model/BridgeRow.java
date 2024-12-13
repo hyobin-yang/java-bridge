@@ -1,20 +1,26 @@
 package bridge.model;
 
 public enum BridgeRow {
-    U(1), D(0);
+    UP("U", 1), DOWN("D", 0);
 
-    private final int bridgeRow;
+    private final String bridgeRow;
+    private final int bridgeRowNumber;
 
-    BridgeRow(int bridgeRow){
+    BridgeRow(String bridgeRow, int bridgeRowNumber){
         this.bridgeRow = bridgeRow;
+        this.bridgeRowNumber = bridgeRowNumber;
     }
 
-    public static BridgeRow getBridgeRow(int number){
-        if (number == U.bridgeRow){
-            return U;
+    public String getBridgeRow(){
+        return bridgeRow;
+    }
+
+    public static String getBridgeRow(int number){
+        if (number == UP.bridgeRowNumber){
+            return UP.bridgeRow;
         }
-        if (number == D.bridgeRow){
-            return D;
+        if (number == DOWN.bridgeRowNumber){
+            return DOWN.bridgeRow;
         }
         throw new IllegalArgumentException("[SYSTEM]: 다리를 나타내는 숫자 입력이 잘못되었습니다.");
     }

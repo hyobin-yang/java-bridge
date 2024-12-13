@@ -23,10 +23,10 @@ public class BridgeMaker {
     }
 
     private void addBridge(int number, List<String> bridge){
-        if (BridgeRow.getBridgeRow(number).equals(BridgeRow.UP)){
+        if (BridgeRow.getBridgeRow(number).equals(BridgeRow.UP.getBridgeRow())){
             bridge.add(BridgeRow.UP.getBridgeRow());
         }
-        if (BridgeRow.getBridgeRow(number).equals(BridgeRow.DOWN)){
+        if (BridgeRow.getBridgeRow(number).equals(BridgeRow.DOWN.getBridgeRow())){
             bridge.add(BridgeRow.DOWN.getBridgeRow());
         }
     }

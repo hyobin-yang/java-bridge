@@ -22,7 +22,7 @@ public class OutputView {
     }
 
     public void printResult(FinalResultDTO dto) {
-        System.out.println("최종 게임 결과");
+        System.out.println("\n최종 게임 결과");
         printMap(dto.getUpperBridge(), dto.getLowerBridge());
         System.out.println();
         System.out.println("게임 성공 여부: " + dto.getIsSucceed());
