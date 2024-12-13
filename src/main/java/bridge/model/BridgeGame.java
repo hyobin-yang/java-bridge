@@ -7,8 +7,8 @@ import java.util.List;
 
 public class BridgeGame {
 
-    private List<String> upperBridge;
-    private List<String> lowerBridge;
+    private final List<String> upperBridge;
+    private final List<String> lowerBridge;
 
     private int movePosition = 0;
     private boolean isSuccess = false;
