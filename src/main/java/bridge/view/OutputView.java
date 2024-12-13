@@ -1,5 +1,7 @@
 package bridge.view;
 
+import bridge.dto.FinalResultDTO;
+
 import java.util.List;
 
 public class OutputView {
@@ -19,11 +21,11 @@ public class OutputView {
         System.out.println(OPEN_SQUARE_BRACKETS + lowerBridgeResult + CLOSE_SQUARE_BRACKETS);
     }
 
-    public void printResult(List<String> upperBridge, List<String> lowerBridge, String isSuccess, int tryCount) {
+    public void printResult(FinalResultDTO dto) {
         System.out.println("최종 게임 결과");
-        printMap(upperBridge, lowerBridge);
+        printMap(dto.getUpperBridge(), dto.getLowerBridge());
         System.out.println();
-        System.out.println("게임 성공 여부: " + isSuccess);
-        System.out.println("총 시도한 횟수: " + tryCount);
+        System.out.println("게임 성공 여부: " + dto.getIsSucceed());
+        System.out.println("총 시도한 횟수: " + dto.getTryCount());
     }
 }
