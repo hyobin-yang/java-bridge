@@ -31,31 +31,48 @@ public class BridgeGame {
 
     private void moveToUpperBridge(List<String> bridge){
         if (bridge.get(movePosition).equals(BridgeRow.UP.getBridgeRow())){
-            isSuccess = true;
-            upperBridge.add(MoveExpression.GO.getExpression());
-            lowerBridge.add(MoveExpression.NONE.getExpression());
+            handleUpperBridgeSucceed();
         }
         if (bridge.get(movePosition).equals(BridgeRow.DOWN.getBridgeRow())){
-            isSuccess = false;
-            upperBridge.add(MoveExpression.STOP.getExpression());
-            lowerBridge.add(MoveExpression.NONE.getExpression());
+            handleUpperBridgeFail();
         }
         forwardToNextBridge();
     }
 
+    private void handleUpperBridgeSucceed(){
+        isSuccess = true;
+        upperBridge.add(MoveExpression.GO.getExpression());
+        lowerBridge.add(MoveExpression.NONE.getExpression());
+    }
+
+    private void handleUpperBridgeFail(){
+        isSuccess = false;
+        upperBridge.add(MoveExpression.STOP.getExpression());
+        lowerBridge.add(MoveExpression.NONE.getExpression());
+    }
+
     private void moveToLowerBridge(List<String> bridge){
         if (bridge.get(movePosition).equals(BridgeRow.DOWN.getBridgeRow())){
-            lowerBridge.add(MoveExpression.GO.getExpression());
-            upperBridge.add(MoveExpression.NONE.getExpression());
-            isSuccess = true;
+            handleLowerBridgeSucceed();
         }
         if (bridge.get(movePosition).equals(BridgeRow.UP.getBridgeRow())){
-            lowerBridge.add(MoveExpression.STOP.getExpression());
-            upperBridge.add(MoveExpression.NONE.getExpression());
-            isSuccess = false;
+            handleLowerBridgeFail();
         }
         forwardToNextBridge();
     }
+
+    private void handleLowerBridgeSucceed(){
+        lowerBridge.add(MoveExpression.GO.getExpression());
+        upperBridge.add(MoveExpression.NONE.getExpression());
+        isSuccess = true;
+    }
+
+    private void handleLowerBridgeFail(){
+        lowerBridge.add(MoveExpression.STOP.getExpression());
+        upperBridge.add(MoveExpression.NONE.getExpression());
+        isSuccess = false;
+    }
+
 
     private void forwardToNextBridge(){
         movePosition ++;
